@@ -34,7 +34,7 @@ In this case `process.argv` will be:
 ```javscript
 process.argv // = [path_to_node, path_to_current_file, 'node', 'is', 'awesome'];
 
-//so you can access the arguments you pass in like so:
+// so you can access the arguments you pass in like so:
 
 process.argv[2] // = 'node';
 process.argv[3] // = 'is';
@@ -70,12 +70,65 @@ will output the contents of that latter file to the terminal like `cat`.
 
 *Hint: You will need the `process` object and the `fs` module.*
 
-### Task 1b - options
+### Task 1b - Options
 
 Many unix commands have what are called options. Options are arguments you can pass to the execution of the command that modify its behaviour. They are typically in the format of a dash followed by a lowercase letter.
 
-For example, `cat -n` will print not only the file itself to the terminal, but also the corresponding line numbers.
+For example, `cat -n` will print not only the file itself to the terminal, but also the corresponding line numbers. Try it out on `index.html`!
 
-Your task is to modify your existing cat command in cat.js so that it can accept an option argument. If `-n` is passed as first argument (`node path_to_cat.js -n`), your cat command should print the corresponding line numbers to the terminal, in addition to the file itself. Your program should do its normal behaviour if no arguments are provided.
+Your task is to modify your existing cat command in cat.js so that it can accept an option argument. If `-n` is passed as first argument (e.g. `node path_to_cat.js -n index.html`), your cat command should print the corresponding line numbers to the terminal, in addition to the file itself. Your program should do its normal behaviour if no option is provided.
 
-### Proceed to [Lesson 2 ->](./LESSON2.md)
+### Task 1c - Making your script executable
+
+So that was fun! But wouldn't it be nice if rather than having to type
+
+`node script.js arguments`
+
+and adjusting the script's file path all the time relative to our current location, we could just run `script` in our terminal anywhere in our directory tree and know it will work just like existing shell commands?
+
+You can do that in node and it only takes a few simple steps!
+
+1: In your cat.js file, add this to the top line of the file:
+
+```
+#!/usr/bin/env node
+```
+
+2: Run `npm init` in the root folder of this repo and create a `package.json`.
+
+3: Adjust your `package.json` as follows:
+
+* Remove the main entry: this is only used for modules that will be used through the module system.
+* Add `preferGlobal` and set it to `true`, which means if someone installs this module through npm and doesn’t use the `--global` option, they will be warned that the module is designed to be installed globally.
+* Add the bin object, which maps commands to files. This means when this module is installed, npm will set up the named executables to execute their assigned javascript files. Don't name your commands after existing commands like cat; they need to be unique.
+
+Your `package.json` should now look like this:
+
+```javascript
+{
+  "name": "node-shell-workshop",
+  "version": "1.0.0",
+  "description": "learn how to shell script with node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "your lovely selves",
+  "license": "ISC",
+  "preferGlobal": true,
+  "bin": {
+    "your-name-here-cat": "lesson-1/cat.js",
+  }
+}
+```
+
+4: Now in the same repo you can run `npm link` to install the script on your system. This creates a symlink to your project so that you can run the project whilst working on it, with no need to keep reinstalling it over and over again.
+
+5: Now... move into a different directory and try out...
+
+```
+your-name-here-cat file.extension
+```
+
+: - )
+
+### Proceed to [Lesson 2 ->](./lesson-2.md)
