@@ -225,3 +225,5 @@ var writeStream = fs.createWriteStream(write.extension, { 'flags': 'a' })
 ```
 
 *allows write streams to append instead of write content.*
+
+### That's it! Congratulations!

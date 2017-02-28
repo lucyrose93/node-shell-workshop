@@ -50,3 +50,5 @@ your-name-here-cat file.extension
 ```
 
 : - )
+
+### Proceed to [LESSON3](./LESSON3.md)

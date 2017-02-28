@@ -2,12 +2,11 @@
 
 A workshop that takes you through the basics of doing shell scripting with node.js.
 
-This workshop consists of three lessons:
-- [LESSON1.md](./LESSON1.md)
-- [LESSON2.md](./LESSON2.md)
-- [LESSON3.md](.//LESSON3.md)
+- [LESSON1](./LESSON1.md)
+- [LESSON2](./LESSON2.md)
+- [LESSON3](.//LESSON3.md)
 
-This workshop is shortened and slightly modified version of Bradley Reeder's [Node Shell workshop](https://github.com/bradreeder/Node-Shell-Workshop). Please check it out and star it!
+This workshop is a shortened and slightly modified version of Bradley Reeder's [Node Shell workshop](https://github.com/bradreeder/Node-Shell-Workshop). Please check it out, and please star both this and the original repo!
 
 ## Resources
 
