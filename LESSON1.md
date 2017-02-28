@@ -78,4 +78,4 @@ For example, `cat -n` will print not only the file itself to the terminal, but a
 
 Your task is to modify your existing cat command in cat.js so that it can accept an option argument. If `-n` is passed as first argument (`node path_to_cat.js -n`), your cat command should print the corresponding line numbers to the terminal, in addition to the file itself. Your program should do its normal behaviour if no arguments are provided.
 
-### Proceed to [LESSON2](./LESSON2.md)
+### Proceed to [Lesson 2 ->](./LESSON2.md)

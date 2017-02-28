@@ -226,4 +226,6 @@ var writeStream = fs.createWriteStream(write.extension, { 'flags': 'a' })
 
 *allows write streams to append instead of write content.*
 
-### That's it! Congratulations!
+### :checkered_flag: That's it! Congratulations! :checkered_flag:
+
+_If you're hungry for more, please see Bradley's [longer version](https://github.com/bradreeder/Node-Shell-Workshop) of this workshop. It includes exercises on writing `ls` and `grep` commands, and a section on piping data._
