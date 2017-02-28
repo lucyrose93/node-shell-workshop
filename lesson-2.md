@@ -1,6 +1,6 @@
-## Lesson 3 - Using streams in your script
+## Lesson 2 - Using streams in your script
 
-_Please go into the lesson-3 folder in your terminal. The relevant files for this lesson are there._
+_Please go into the lesson-2 folder in your terminal. The relevant files for this lesson are there._
 
 ### Introduction
 
@@ -72,7 +72,7 @@ as it becomes available. Finally, when the stream has finished reading the file 
 At this point, the whole file has been read chunk by chunk, and the variable `fileContent`
 should contain all the content of the read file.
 
-### Task 3a - Read Streams
+### Task 2a - Read Streams
 
 Inside `cat.js` re-write your `cat` command to use a read stream instead of `fs.readFile`.
 
@@ -81,7 +81,7 @@ To recap, your `cat` command should be executed like this:
 `node cat.js file.extension`
 
 It should output the contents of `file.extension` to the terminal. You can try using
-your command on some example files in the public folder.
+your command on the example files in the public folder.
 
 *Hint: If you see something like this get outputted to your terminal:*
 
@@ -95,11 +95,11 @@ of the file that is being read. `10` for example is equivalent to `/n`. To conve
 the buffer into a string you can use the `toString()` method, or provide `'utf-8'` as the
 second argument of `fs.createReadStream`.*
 
-### Task 3b - Write Streams
+### Task 2b - Write Streams
 
 If read streams let you read files, write streams let you write content to them!
 
-Create a new file now called `write-stream.js` and try out the following. Type it rather than copy and paste:
+Inside `write.js`, type the following (don't copy-paste it):
 
 ```javascript
 var fs = require("fs");
@@ -120,13 +120,13 @@ writeStream.on('finish', function() {
 });
 ```
 
-Now try running `node write-stream.js`. It should log `Write completed.` to the terminal and a new file called `output.txt` with the content `Simply Easy Learning` should have been created.
+Now try running `node write.js`. It should log `Write completed.` to the terminal and a new file called `output.txt` with the content `Simply Easy Learning` should have been created.
 
 Did you notice write streams use `.write()` and `.end()` like the `response` object of your servers? That's because the `response` object is a write stream and when you're responding to the client you're 'writing' content to it!
 
 The `request` object, likewise, is a read stream as when the client makes a request you're 'reading' the content that has been 'streamed' to the server!
 
-### Task 3c - Redirection
+### Task 2c - Redirection
 
 In Unix, it is possible to take the output of a command that would normally be printed
 to the terminal (standard output) and redirect it so that the contents of that output
@@ -147,16 +147,16 @@ Go into the public folder and try this:
 node path_to_your_cat.js index.html > example.js
 ```
 
-Can you see `example.js` now has been overwritten to contain the contents of `index.html`?
+Can you see `example.js` has now been overwritten to contain the contents of `index.html`?
 
 *(note: this command will over-write the file's prior content so be careful using this on your
 solution scripts.)*
 
-Inside `write.js` modify your `cat` command from the first exercise so that you can
-give it the following arguments
+Inside `redirect.js` modify your `cat` command from the first exercise so that you can
+give it the following arguments:
 
 ```
-node write.js read.extension '>' write.extension
+node redirect.js read.extension '>' write.extension
 ```
 
 If `'>'` is given as argument followed by another file as an argument it will,
@@ -183,7 +183,7 @@ readStream.pipe(writeStream);
 `readStream` it will immediately be redirected to become the input of `writeStream`. This input
 will get written to `write.extension`.*
 
-### Task 3d - Appending files
+### Task 2d - Appending files
 
 You may not always want to completely re-write the contents of a file. What if
 you want the content of a file to remain intact but simply append new content
@@ -207,7 +207,7 @@ node path_to_your_cat.js index.html >> example.js
 Can you see `example.js` now has the contents of `index.html` appended onto the end?
 
 Inside `append.js` modify your `cat` command from the first exercise so that you can
-give it the following arguments
+give it the following arguments:
 
 ```
 node append.js read.extension '>>' write.extension
@@ -228,4 +228,4 @@ var writeStream = fs.createWriteStream(write.extension, { 'flags': 'a' })
 
 ### :checkered_flag: That's it! Congratulations! :checkered_flag:
 
-_If you're hungry for more, please see Bradley's [longer version](https://github.com/bradreeder/Node-Shell-Workshop) of this workshop. It includes exercises on writing `ls` and `grep` commands, and a section on piping data._
+_If you're hungry for more, please see Bradley's [longer version](https://github.com/bradreeder/Node-Shell-Workshop) of this workshop. It includes exercises on writing `ls` and `grep` commands, and a section on piping shell commands._
