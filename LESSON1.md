@@ -1,20 +1,15 @@
-# Lesson 1
+## Lesson 1 - Writing your own shell script
 
-## Introduction
+_Please clone this repo and go into the lesson-1 folder in your terminal. The relevant files for this lesson are there._
+
+### Introduction
 
 It's important to realise that, in giving you access to the file system and network,
-node can be used for more than just creating web servers.
-
-In this series of lessons we are going to use some of node's features to do some shell scripting!
+node can be used for more than just creating web servers. In this series of lessons we are going to use some of node's features to do some shell scripting!
 
 A shell script is a program designed to be run by the Unix shell. Typical operations performed by shell scripts include file manipulation, program execution, and printing text.
 
-You've likely come across some typical shell commands already. Have you used `cat`, `ls`, or `grep` in your
-terminal before? To start off today, we're going to implement our own versions of these commands using javascript.
-
-### Getting started
-
-Clone this repo and go into the lesson-1 folder in your terminal. The relevant files for today are there.
+You've likely come across some typical shell commands already. Have you used `cat`, `ls`, or `grep` in your terminal before? To start off today, you're going to implement your own version of the `cat` command using javascript.
 
 From your terminal if you want to execute a javascript program you've written you can use the following command:
 
@@ -24,8 +19,7 @@ node path_to_program.js
 
 Note the path you give to the program is relative to what directory you are in.
 
-Something you may not know is that you can actually pass arguments into your javascript program from
-the command line as well. For example:
+Something you may not know is that you can actually pass arguments into your javascript program from the command line as well. For example:
 
 ```
 node path_to_program.js node is awesome
@@ -60,15 +54,13 @@ process.stdout.write(process.argv[2] + process.argv[3] + process.argv[4]);
 
 It will output `node is awesome` to the terminal.
 
-### Exercise 1 - cat
+### Task 1a - cat command
 
 In unix, `cat` is a command that takes the path to a file as its argument and will output the contents of that file to the terminal. It is used like this:
 
 `cat path_to_file.extension`
 
 Try outputting the contents of `index.html` in the public folder of this repo to the terminal to see what it looks like.
-
-#### Task
 
 Inside `cat.js` write a program that when called like this from the terminal
 
@@ -78,90 +70,25 @@ will output the contents of that latter file to the terminal like `cat`.
 
 *Hint: You will need the `process` object and the `fs` module.*
 
-### Exercise 2 - ls
-
-`ls` is a command that when called will output the names of all the files and directories in the directory it was called from to the terminal. It is called like this:
-
-`ls`
-
-Try using `ls` in one of the folders of this repo to see what it looks like.
-
-#### Task
-
-Inside `ls.js` write a program that when called like this from the terminal `node path_to_ls.js` will output the names of all the files and directories in the directory you called from to the terminal.
-
-Calling `node ls.js` from the lesson-1 folder of this repo should print:
-
-`cat.js   grep.js   ls.js   public   `
-
-Calling `node ../ls.js` from the public folder should print:
-
-`grep.scm   index.html   solutions.js   `, etc.
-
-Don't worry about being exact with the spacing, just print them on the same line with some spacing.
-
-*Hint: you're going to need the method `process.cwd()` to access the directory your node command was called from. (You can't say I'm cryptic!).*
-
-### Exercise 3 - options
+### Task 1b - options
 
 Many unix commands have what are called options. Options are arguments you can pass to the execution of the command that modify its behaviour. They are typically in the format of a dash followed by a lowercase letter.
 
-`ls -a` for example will show all the directories/files starting with a dot (like `.gitignore`) that will otherwise be hidden when you call the `ls` command.
+For example, `cat -n` will print not only the file itself to the terminal, but also the corresponding line numbers.
 
-#### Task
+Your task is to modify your existing cat command in cat.js so that it can accept an option argument. If `-n` is passed as first argument (`node path_to_cat.js -n`), your cat command should print the corresponding line numbers to the terminal, in addition to the file itself. Your program should do its normal behaviour if no arguments are provided.
 
-Your task is to modify your existing `ls` command in `ls.js` so that it can accept an option argument.
-
-Specifically: `node path_to_ls.js -ex extension`. If `-ex` is passed as first argument, your `ls` command should only print the names of the files in the current directory that have the extension specified by the second argument. Your program should do its normal behaviour if no arguments are provided.
-
-`node ls.js -ex js` when called from the root directory should print:
-
-`cat.js   grep.js   ls.js   `
-
-and `node ../ls.js -ex scm` from public:
-
-`grep.scm   `, etc.
-
-### Exercise 4 - grep
-
-`grep` stands for 'global regular expression print.' It's essentially a Unix regular expression command that will print to the terminal all lines in a file that match a specified pattern.
-
-In our public directory calling `grep 'all' grep.scm` from the command-line will print:
-
-```
-;;;   And fill all fruit with ripeness to the core;
-;;;      Spares the next swath and all its twined flowers:
-;;;Then in a wailful choir the small gnats mourn
-;;;   Among the river sallows, borne aloft
-;;;      And gathering swallows twitter in the skies.
-```
-
-Where `all` is the pattern it is looking for and `grep.scm` the specified file to search for it in.
-Note that it prints the whole line if it finds the pattern inside it.
-
-#### Task
-
-Inside `grep.js` write a program that when executed like this
-
-`node path_to_grep.js pattern file`
-
-will print every line in the file specified that matches the pattern specified. Each line should be printed on its own line.
-
-*Hint: try doing this just with `fs` first and see what happens. You're going to need a specific core module in order to access the whole line of a file as you're reading it.*
-
-*Look through the list of core modules or use Stack Overflow if you get stuck. Please don't use third party modules for this exercise. You should default to using core modules while you're learning where it's possible to.*
-
-### Making your new scripts executable
+## Lesson 2 - Making your script executable
 
 So that was fun! But wouldn't it be nice if rather than having to type
 
 `node script.js arguments`
 
-adjusting the script's file path all the time relative to our current location we could just run `script` in our terminal anywhere in our directory tree and know it will work just like `cat`, `ls`, and `grep`?
+and adjusting the script's file path all the time relative to our current location, we could just run `script` in our terminal anywhere in our directory tree and know it will work just like existing shell commands?
 
 You can do that in node and it only takes a few simple steps!
 
-1: In each of your cat.js, ls.js, and grep.js files add this to the top line of the file:
+1: In your cat.js file, add this to the top line of the file:
 
 ```
 #!/usr/bin/env node
@@ -190,8 +117,6 @@ Your `package.json` should now look like this:
   "preferGlobal": true,
   "bin": {
     "your-name-here-cat": "lesson-1/cat.js",
-    "your-name-here-ls": "lesson-1/ls.js",
-    "your-name-here-grep": "lesson-1/grep.js"
   }
 }
 ```
@@ -202,17 +127,234 @@ Your `package.json` should now look like this:
 
 ```
 your-name-here-cat file.extension
-your-name-here-ls
-your-name-here-ls -ex extension
-your-name-here-grep pattern file.extension
 ```
 
 : - )
 
-**To be continued: more options, recursives, wildcards, redirections, pipes, publishing your new found wizardry on npm, storing your environment variables using shell commands...**
+## Lesson 3 - Using streams in your script
 
-**To be incorporated (on my part):**
+_Please go into the lesson-3 folder in your terminal. The relevant files for this lesson are there._
 
-* add actual tests to this workshop with tape.
+### Introduction
 
-* make it into a tutorial that runs on the terminal screen like codeschool.
+In this lesson we are going to cover an alternative way of reading and writing to files
+using one of the core features of node: `streams`.
+
+Whenever you've watched a video online, have you noticed you can start watching it
+even though the whole video hasn't finished loading? That's because it is being 'streamed', bit by bit, so that as every chunk of its data becomes available it is immediately put to use.
+
+A `stream` in node is simply an interface for working with 'streaming data' like this.
+Streams can be `readable` (e.g. reading a file), `writable` (e.g. writing new content to a
+file), or both.
+
+### Streams in readFile
+
+Let's start with something familiar. Up until now, whenever you've needed to read a file using node's `fs` module you've likely
+done something like the following:
+
+```javascript
+fs.readFile(file, function(err, file) {
+  if (err) console.error(err);
+  // do something with file
+});
+```
+
+It turns out that under the hood, `readFile` actually uses streams! Let's look at a simplified version of the `readFile` function:
+
+```javascript
+fs.readFile = function(file, cb) {
+
+  var readStream = fs.createReadStream(file);
+  //set up a read stream on a target file and store it in a variable
+
+  var fileContent = '';
+  //create an empty string we will use to store the contents of the read file.
+
+  readStream.on('data', function(chunk) {
+    fileContent += chunk;
+  });
+  //every time a new chunk of the read file becomes available we append it to our fileContent variable
+
+  readStream.on('error', function(err) {
+    cb(err, fileContent)
+  });
+  // handle errors
+
+  readStream.on('end', function() {
+    cb(null, fileContent);
+  });
+  // do something with fileContent
+}
+```
+
+Now let's go through each bit in more detail, and explain what's happening.
+
+`streams` have a method `stream.on('event', function () {})`. What it does is subscribes a function to the specified event, so that it will be executed every time the event occurs.
+
+```
+readStream.on('data', function (chunk) {
+  fileContent += chunk;
+});
+```
+
+Here `data` is the type of event. The target file of `readStream` will be read bit by bit. Every time a new chunk becomes available, the `data` event is triggered and the function is called. Its first argument is always
+the contents of the new available `chunk`.
+
+Here we just append each chunk of new content to the `fileContent` variable as soon
+as it becomes available. Finally, when the stream has finished reading the file the `end` event is triggered.
+At this point, the whole file has been read chunk by chunk, and the variable `fileContent`
+should contain all the content of the read file.
+
+### Task 3a - Read Streams
+
+Inside `cat.js` re-write your `cat` command to use a read stream instead of `fs.readFile`.
+
+To recap, your `cat` command should be executed like this:
+
+`node cat.js file.extension`
+
+It should output the contents of `file.extension` to the terminal. You can try using
+your command on some example files in the public folder.
+
+*Hint: If you see something like this get outputted to your terminal:*
+
+```
+<Buffer 68 65 6c 6c 6f 20 77 6f 72 6c 64>
+```
+
+*This is called a 'buffer'. It's an encoded format that represents the file's raw
+binary data. Each part of the sequence `68`, `65`, `6c` etc, represent characters
+of the file that is being read. `10` for example is equivalent to `/n`. To convert
+the buffer into a string you can use the `toString()` method, or provide `'utf-8'` as the
+second argument of `fs.createReadStream`.*
+
+### Task 3b - Write Streams
+
+If read streams let you read files, write streams let you write content to them!
+
+Create a new file now called `write-stream.js` and try out the following. Type it rather than copy and paste:
+
+```javascript
+var fs = require("fs");
+var data = 'Simply Easy Learning';
+
+// Create a writable stream
+var writeStream = fs.createWriteStream('output.txt');
+
+// Write the data to stream with encoding to be utf8
+writeStream.write(data,'UTF8');
+
+// Mark the end of file
+writeStream.end();
+
+// When the stream finishes log 'write completed'
+writeStream.on('finish', function() {
+    console.log("Write completed.");
+});
+```
+
+Now try running `node write-stream.js`. It should log `Write completed.` to the terminal and a new file called `output.txt` with the content `Simply Easy Learning` should have been created.
+
+Did you notice write streams use `.write()` and `.end()` like the `response` object of your servers? That's because the `response` object is a write stream and when you're responding to the client you're 'writing' content to it!
+
+The `request` object, likewise, is a read stream as when the client makes a request you're 'reading' the content that has been 'streamed' to the server!
+
+### Task 3c - Redirection
+
+In Unix, it is possible to take the output of a command that would normally be printed
+to the terminal (standard output) and redirect it so that the contents of that output
+are written to a file instead.
+
+The command we use to accomplish this is `>` :
+
+```
+cat index.html > example.js
+```
+
+`cat index.html` will read the html file and output its contents, then `>` will take
+this output and redirect it so that it is written to `example.js` instead.
+
+Go into the public folder and try this:
+
+```
+node path_to_your_cat.js index.html > example.js
+```
+
+Can you see `example.js` now has been overwritten to contain the contents of `index.html`?
+
+*(note: this command will over-write the file's prior content so be careful using this on your
+solution scripts.)*
+
+Inside `write.js` modify your `cat` command from the first exercise so that you can
+give it the following arguments
+
+```
+node write.js read.extension '>' write.extension
+```
+
+If `'>'` is given as argument followed by another file as an argument it will,
+instead of outputting the contents of `read.extension` to the terminal, write the contents
+of it to `write.extension` instead.
+
+*Hint: To write content to `write.extension` you will need to create a write stream like so:*
+
+```javascript
+var writeStream = fs.createWriteStream(write.extension)
+```
+
+*If you want to take the output of a read stream and make it become the input
+of a write stream, this is called 'piping.' Piping in node is done using `streams`
+`pipe()` method:*
+
+```javascript
+var readStream = fs.createReadStream(read.extension);
+var writeStream = fs.createWriteStream(write.extension);
+
+readStream.pipe(writeStream);
+```
+*What this code snippet means is every time a new `chunk` of `read.extension` gets read by
+`readStream` it will immediately be redirected to become the input of `writeStream`. This input
+will get written to `write.extension`.*
+
+### Task 3d - Appending files
+
+You may not always want to completely re-write the contents of a file. What if
+you want the content of a file to remain intact but simply append new content
+onto the end of it?
+
+In Unix you can do this using `>>` :
+
+```
+cat index.html >> example.js
+```
+
+`cat index.html` will read the html file and output its contents, then `>>` will take
+this output and redirect it so that it is appended to the contents of `example.js`.
+
+Go into the public folder and try this:
+
+```
+node path_to_your_cat.js index.html >> example.js
+```
+
+Can you see `example.js` now has the contents of `index.html` appended onto the end?
+
+Inside `append.js` modify your `cat` command from the first exercise so that you can
+give it the following arguments
+
+```
+node append.js read.extension '>>' write.extension
+```
+
+If `'>>'` is provided as an argument followed by a file as another argument it will,
+instead of outputting the contents of `read.extension` to the terminal, append
+it to `write.extension` instead.
+
+*Hint: There are multiple ways of solving this. `fs.createReadStream`, and `fs.createWriteStream`
+can be passed a flags object as a second argument. In particular:*
+
+```javascript
+var writeStream = fs.createWriteStream(write.extension, { 'flags': 'a' })
+```
+
+*allows write streams to append instead of write content.*
