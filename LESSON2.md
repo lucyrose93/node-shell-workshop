@@ -51,4 +51,4 @@ your-name-here-cat file.extension
 
 : - )
 
-### Proceed to [LESSON3](./LESSON3.md)
+### Proceed to [Lesson 3 ->](./LESSON3.md)
