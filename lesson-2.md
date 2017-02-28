@@ -228,4 +228,4 @@ var writeStream = fs.createWriteStream(write.extension, { 'flags': 'a' })
 
 ### :checkered_flag: That's it! Congratulations! :checkered_flag:
 
-_If you're hungry for more, please see Bradley's [longer version](https://github.com/bradreeder/Node-Shell-Workshop) of this workshop. It includes exercises on writing `ls` and `grep` commands, and a section on piping shell commands._
+_If you're hungry for more, please see Bradley's [longer version](https://github.com/bradreeder/Node-Shell-Workshop) of this workshop. It includes exercises on writing `ls` and `grep` commands, a section on piping shell commands, and a project where you can build your own command-line tool!_
