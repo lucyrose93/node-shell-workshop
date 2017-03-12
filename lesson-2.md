@@ -58,17 +58,15 @@ Now let's go through each bit in more detail, and explain what's happening.
 
 `streams` have a method `stream.on('event', function () {})`. What it does is subscribes a function to the specified event, so that it will be executed every time the event occurs.
 
-```
+``` javascript
 readStream.on('data', function (chunk) {
   fileContent += chunk;
 });
 ```
 
-Here `data` is the type of event. The target file of `readStream` will be read bit by bit. Every time a new chunk becomes available, the `data` event is triggered and the function is called. Its first argument is always
-the contents of the new available `chunk`.
+Here `data` is the type of event. The target file of `readStream` will be read bit by bit. Every time a new chunk becomes available, the `data` event is triggered and the function is called. Its first argument is always the contents of the new available `chunk`. In this case, we just append each chunk of new content to the `fileContent` variable.
 
-Here we just append each chunk of new content to the `fileContent` variable as soon
-as it becomes available. Finally, when the stream has finished reading the file the `end` event is triggered.
+Finally, when the stream has finished reading the file the `end` event is triggered.
 At this point, the whole file has been read chunk by chunk, and the variable `fileContent`
 should contain all the content of the read file.
 
@@ -78,9 +76,9 @@ Inside `cat.js` re-write your `cat` command to use a read stream instead of `fs.
 
 To recap, your `cat` command should be executed like this:
 
-`node cat.js file.extension`
+`node cat.js file`
 
-It should output the contents of `file.extension` to the terminal. You can try using
+It should output the contents of `file` to the terminal. You can try using
 your command on the example files in the public folder.
 
 *Hint: If you see something like this get outputted to your terminal:*
@@ -122,7 +120,7 @@ writeStream.on('finish', function() {
 
 Now try running `node write.js`. It should log `Write completed.` to the terminal and a new file called `output.txt` with the content `Simply Easy Learning` should have been created.
 
-Did you notice write streams use `.write()` and `.end()` like the `response` object of your servers? That's because the `response` object is a write stream and when you're responding to the client you're 'writing' content to it!
+Did you notice write streams use `.write()` and `.end()`, just like the `response` object of your servers? That's because the `response` object is a write stream and when you're responding to the client you're 'writing' content to it!
 
 The `request` object, likewise, is a read stream as when the client makes a request you're 'reading' the content that has been 'streamed' to the server!
 
@@ -149,39 +147,40 @@ node path_to_your_cat.js index.html > example.js
 
 Can you see `example.js` has now been overwritten to contain the contents of `index.html`?
 
-*(note: this command will over-write the file's prior content so be careful using this on your
+*(Note: this command will over-write the file's prior content so be careful using this on your
 solution scripts.)*
 
 Inside `redirect.js` modify your `cat` command from the first exercise so that you can
 give it the following arguments:
 
 ```
-node redirect.js read.extension '>' write.extension
+node redirect.js read-file '>' write-file
 ```
 
 If `'>'` is given as argument followed by another file as an argument it will,
-instead of outputting the contents of `read.extension` to the terminal, write the contents
-of it to `write.extension` instead.
+instead of outputting the contents of `read-file` to the terminal, write the contents
+of it to `write-file` instead.
 
-*Hint: To write content to `write.extension` you will need to create a write stream like so:*
+*(Note: you need to include the quotes around `>`, otherwise it will be interpreted as the in-built Unix command.)*
+
+*Hint: To write content to `write.file` you will need to create a write stream like so:*
 
 ```javascript
-var writeStream = fs.createWriteStream(write.extension)
+var writeStream = fs.createWriteStream(write.file)
 ```
 
 *If you want to take the output of a read stream and make it become the input
-of a write stream, this is called 'piping.' Piping in node is done using `streams`
-`pipe()` method:*
+of a write stream, this is called 'piping.' Piping in node is done using `stream.pipe()` method:*
 
 ```javascript
-var readStream = fs.createReadStream(read.extension);
-var writeStream = fs.createWriteStream(write.extension);
+var readStream = fs.createReadStream(read-file);
+var writeStream = fs.createWriteStream(write-file);
 
 readStream.pipe(writeStream);
 ```
-*What this code snippet means is every time a new `chunk` of `read.extension` gets read by
+*What this code snippet means is every time a new `chunk` of `read-file` gets read by
 `readStream` it will immediately be redirected to become the input of `writeStream`. This input
-will get written to `write.extension`.*
+will get written to `write-file`.*
 
 ### Task 2d - Appending files
 
@@ -210,22 +209,22 @@ Inside `append.js` modify your `cat` command from the first exercise so that you
 give it the following arguments:
 
 ```
-node append.js read.extension '>>' write.extension
+node append.js read-file '>>' write-file
 ```
 
 If `'>>'` is provided as an argument followed by a file as another argument it will,
-instead of outputting the contents of `read.extension` to the terminal, append
-it to `write.extension` instead.
+instead of outputting the contents of `read-file` to the terminal, append
+it to `write-file` instead.
 
 *Hint: There are multiple ways of solving this. `fs.createReadStream`, and `fs.createWriteStream`
 can be passed a flags object as a second argument. In particular:*
 
 ```javascript
-var writeStream = fs.createWriteStream(write.extension, { 'flags': 'a' })
+var writeStream = fs.createWriteStream(write-file, { 'flags': 'a' })
 ```
 
 *allows write streams to append instead of write content.*
 
-### :checkered_flag: That's it! Congratulations! :checkered_flag:
+### :checkered_flag: That's the end of the workshop! Congratulations! :checkered_flag:
 
-_If you're hungry for more, please see Bradley's [longer version](https://github.com/bradreeder/Node-Shell-Workshop) of this workshop. It includes exercises on writing `ls` and `grep` commands, a section on piping shell commands, and a project where you can build your own command-line tool!_
+_If you're hungry for more, please see Bradley's [longer version](https://github.com/bradreeder/Node-Shell-Workshop) of this workshop._
