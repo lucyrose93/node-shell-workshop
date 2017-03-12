@@ -70,7 +70,7 @@ Finally, when the stream has finished reading the file the `end` event is trigge
 At this point, the whole file has been read chunk by chunk, and the variable `fileContent`
 should contain all the content of the read file.
 
-### Task 2a - Read Streams
+### Exercise 2a - Read Streams
 
 Inside `cat.js` re-write your `cat` command to use a read stream instead of `fs.readFile`.
 
@@ -93,7 +93,7 @@ of the file that is being read. `10` for example is equivalent to `/n`. To conve
 the buffer into a string you can use the `toString()` method, or provide `'utf-8'` as the
 second argument of `fs.createReadStream`.*
 
-### Task 2b - Write Streams
+### Exercise 2b - Write Streams
 
 If read streams let you read files, write streams let you write content to them!
 
@@ -124,7 +124,7 @@ Did you notice write streams use `.write()` and `.end()`, just like the `respons
 
 The `request` object, likewise, is a read stream as when the client makes a request you're 'reading' the content that has been 'streamed' to the server!
 
-### Task 2c - Redirection
+### Exercise 2c - Redirection
 
 In Unix, it is possible to take the output of a command that would normally be printed
 to the terminal (standard output) and redirect it so that the contents of that output
@@ -182,7 +182,7 @@ readStream.pipe(writeStream);
 `readStream` it will immediately be redirected to become the input of `writeStream`. This input
 will get written to `write-file`.*
 
-### Task 2d - Appending files
+### Exercise 2d - Appending files
 
 You may not always want to completely re-write the contents of a file. What if
 you want the content of a file to remain intact but simply append new content

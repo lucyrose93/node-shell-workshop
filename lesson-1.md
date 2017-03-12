@@ -54,7 +54,7 @@ process.stdout.write(process.argv[2] + process.argv[3] + process.argv[4]);
 
 It will output `node is awesome` to the terminal.
 
-### Task 1a - cat command
+### Exercise 1a - cat command
 
 In unix, `cat` is a command that takes the path to a file as its argument and will output the contents of that file to the terminal. It is used like this:
 
@@ -70,7 +70,7 @@ will output the contents of that latter file to the terminal like `cat`.
 
 *Hint: You will need the `process` object and the `fs` module.*
 
-### Task 1b - ls command
+### Exercise 1b - ls command
 
 `ls` is a command that when called will output to the terminal the names of all the files and directories in the directory it was called from.
 
@@ -86,7 +86,7 @@ Don't worry about being exact with the spacing, just print them on the same line
 
 *Hint: you're going to need the method `process.cwd()` to access the directory your node command was called from.*
 
-### Task 1c - flags
+### Exercise 1c - flags
 
 Many unix commands have what are called flags. Flags are arguments you can pass to the execution of the command that modify its behaviour. They are typically in the format of a dash followed by a lowercase letter.
 
@@ -98,7 +98,7 @@ Calling `node ls.js -ex js` from the lesson-1 folder of this repo should print:
 
 `cat.js   grep.js`
 
-### Task 1d - Making your script executable
+### Exercise 1d - Making your script executable
 
 So that was fun! But wouldn't it be nice if rather than having to type
 
