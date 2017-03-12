@@ -154,33 +154,27 @@ Inside `redirect.js` modify your `cat` command from the first exercise so that y
 give it the following arguments:
 
 ```
-node redirect.js read-file '>' write-file
+node redirect.js path_to_read_file '>' path_to_write_file
 ```
 
 If `'>'` is given as argument followed by another file as an argument it will,
-instead of outputting the contents of `read-file` to the terminal, write the contents
-of it to `write-file` instead.
+instead of outputting the contents of `read_file` to the terminal, write the contents
+of it to `write_file` instead.
 
 *(Note: you need to include the quotes around `>`, otherwise it will be interpreted as the in-built Unix command.)*
 
-*Hint: To write content to `write.file` you will need to create a write stream like so:*
-
-```javascript
-var writeStream = fs.createWriteStream(write.file)
-```
-
-*If you want to take the output of a read stream and make it become the input
+*Hint: If you want to take the output of a read stream and make it become the input
 of a write stream, this is called 'piping.' Piping in node is done using `stream.pipe()` method:*
 
 ```javascript
-var readStream = fs.createReadStream(read-file);
-var writeStream = fs.createWriteStream(write-file);
+var readStream = fs.createReadStream('path_to_read_file');
+var writeStream = fs.createWriteStream('path_to_write_file');
 
 readStream.pipe(writeStream);
 ```
-*What this code snippet means is every time a new `chunk` of `read-file` gets read by
+*What this code snippet means is every time a new `chunk` of `read_file` gets read by
 `readStream` it will immediately be redirected to become the input of `writeStream`. This input
-will get written to `write-file`.*
+will get written to `write_file`.*
 
 ### Exercise 2d - Appending files
 
@@ -209,18 +203,18 @@ Inside `append.js` modify your `cat` command from the first exercise so that you
 give it the following arguments:
 
 ```
-node append.js read-file '>>' write-file
+node append.js path_to_read_file '>>' path_to_write_file
 ```
 
 If `'>>'` is provided as an argument followed by a file as another argument it will,
-instead of outputting the contents of `read-file` to the terminal, append
-it to `write-file` instead.
+instead of outputting the contents of `read_file` to the terminal, append
+it to `write_file` instead.
 
-*Hint: There are multiple ways of solving this. `fs.createReadStream`, and `fs.createWriteStream`
+*Hint: There are multiple ways of solving this. `fs.createReadStream` and `fs.createWriteStream`
 can be passed a flags object as a second argument. In particular:*
 
 ```javascript
-var writeStream = fs.createWriteStream(write-file, { 'flags': 'a' })
+var writeStream = fs.createWriteStream('path_to_write_file', { 'flags': 'a' })
 ```
 
 *allows write streams to append instead of write content.*

@@ -9,7 +9,7 @@ node can be used for more than just creating web servers. In this series of less
 
 A shell script is a program designed to be run by the Unix shell. Typical operations performed by shell scripts include file manipulation, program execution, and printing text.
 
-You've likely come across some typical shell commands already. Have you used `cat`, `ls`, or `grep` in your terminal before? To start off today, you're going to implement your own version of the `cat` command using javascript.
+You've likely come across some typical shell commands already. Have you used `cat` or `ls` in your terminal before? Today you're going to implement your own version of these commands using javascript!
 
 From your terminal if you want to execute a javascript program you've written you can use the following command:
 
@@ -56,7 +56,7 @@ It will output `node is awesome` to the terminal.
 
 ### Exercise 1a - cat command
 
-In unix, `cat` is a command that takes the path to a file as its argument and will output the contents of that file to the terminal. It is used like this:
+In Unix, `cat` is a command that takes the path to a file as its argument and will output the contents of that file to the terminal. It is used like this:
 
 `cat path_to_file`
 
@@ -76,9 +76,9 @@ will output the contents of that latter file to the terminal like `cat`.
 
 Try using `ls` in one of the folders of this repo to see what it looks like.
 
-Inside `ls.js` write a program that when called from the terminal (`node path_to_ls.js`) will output to the terminal the names of all the files and directories in the directory you called from.
+Inside `ls.js` write a program that when called from the terminal will output to the terminal the names of all the files and directories in the directory you called from.
 
-Calling `node ls.js` from the lesson-1 folder of this repo should print:
+Calling `node path_to_ls.js` from the lesson-1 folder of this repo should print:
 
 `cat.js ls.js  public`
 
@@ -144,12 +144,12 @@ Your `package.json` should now look like this:
 
 4: Now in the same repo you can run `npm link` to install the script on your system. This creates a symlink to your project so that you can run the project whilst working on it, with no need to keep reinstalling it over and over again.
 
-5: Now... move into a different directory and try out...
+5: Now, move back into lesson-1 and try out...
 
 ```
 your-name-here-cat file
 ```
 
-: - )
+_Does your command work regardless of where you are in the filesystem? If not, how could you fix that?_
 
 ### Proceed to [Lesson 2 ->](./lesson-2.md)
