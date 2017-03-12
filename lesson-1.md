@@ -58,27 +58,47 @@ It will output `node is awesome` to the terminal.
 
 In unix, `cat` is a command that takes the path to a file as its argument and will output the contents of that file to the terminal. It is used like this:
 
-`cat path_to_file.extension`
+`cat path_to_file`
 
 Try outputting the contents of `index.html` in the public folder of this repo to the terminal to see what it looks like.
 
 Inside `cat.js` write a program that when called like this from the terminal
 
-`node path_to_cat.js path_to_file.extension`
+`node path_to_cat.js path_to_file`
 
 will output the contents of that latter file to the terminal like `cat`.
 
 *Hint: You will need the `process` object and the `fs` module.*
 
-### Task 1b - Options
+### Task 1b - ls command
 
-Many unix commands have what are called options. Options are arguments you can pass to the execution of the command that modify its behaviour. They are typically in the format of a dash followed by a lowercase letter.
+`ls` is a command that when called will output to the terminal the names of all the files and directories in the directory it was called from.
 
-For example, `cat -n` will print not only the file itself to the terminal, but also the corresponding line numbers. Try it out on `index.html`!
+Try using `ls` in one of the folders of this repo to see what it looks like.
 
-Your task is to modify your existing cat command in cat.js so that it can accept an option argument. If `-n` is passed as first argument (e.g. `node path_to_cat.js -n index.html`), your cat command should print the corresponding line numbers to the terminal, in addition to the file itself. Your program should do its normal behaviour if no option is provided.
+Inside `ls.js` write a program that when called from the terminal (`node path_to_ls.js`) will output to the terminal the names of all the files and directories in the directory you called from.
 
-### Task 1c - Making your script executable
+Calling `node ls.js` from the lesson-1 folder of this repo should print:
+
+`cat.js ls.js  public`
+
+Don't worry about being exact with the spacing, just print them on the same line with some spacing.
+
+*Hint: you're going to need the method `process.cwd()` to access the directory your node command was called from.*
+
+### Task 1c - flags
+
+Many unix commands have what are called flags. Flags are arguments you can pass to the execution of the command that modify its behaviour. They are typically in the format of a dash followed by a lowercase letter.
+
+For example, `ls -a` will show all directories/files, including those starting with a dot (like `.gitignore`) that will otherwise be hidden when you call the `ls` command.
+
+Your task is to modify your existing `ls` command in `ls.js` so that it can accept an `-ex` flag. If `-ex` is passed as first argument, your `ls` command should only print the names of the files in the current directory that have the extension specified by the second argument. Your program should do its normal behaviour if no flag is provided.
+
+Calling `node ls.js -ex js` from the lesson-1 folder of this repo should print:
+
+`cat.js   grep.js`
+
+### Task 1d - Making your script executable
 
 So that was fun! But wouldn't it be nice if rather than having to type
 
@@ -100,7 +120,7 @@ You can do that in node and it only takes a few simple steps!
 
 * Remove the main entry: this is only used for modules that will be used through the module system.
 * Add `preferGlobal` and set it to `true`, which means if someone installs this module through npm and doesn’t use the `--global` option, they will be warned that the module is designed to be installed globally.
-* Add the bin object, which maps commands to files. This means when this module is installed, npm will set up the named executables to execute their assigned javascript files. Don't name your commands after existing commands like cat; they need to be unique.
+* Add the bin object, which maps commands to files. This means when this module is installed, npm will set up the named executables to execute their assigned javascript files. Don't name your commands after existing commands like cat or ls; they need to be unique.
 
 Your `package.json` should now look like this:
 
@@ -117,6 +137,7 @@ Your `package.json` should now look like this:
   "preferGlobal": true,
   "bin": {
     "your-name-here-cat": "lesson-1/cat.js",
+    "your-name-here-ls": "lesson-1/ls.js"
   }
 }
 ```
@@ -126,7 +147,7 @@ Your `package.json` should now look like this:
 5: Now... move into a different directory and try out...
 
 ```
-your-name-here-cat file.extension
+your-name-here-cat file
 ```
 
 : - )
