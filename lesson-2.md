@@ -208,7 +208,7 @@ instead of outputting the contents of `read_file` to the terminal, append
 it to `write_file` instead.
 
 *Hint: `fs.createReadStream` and `fs.createWriteStream`
-can be passed a flags object as a second argument.
+can be passed a flags object as a second argument.*
 
 ### :checkered_flag: That's the end of the workshop! Congratulations! :checkered_flag:
 
