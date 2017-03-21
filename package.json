@@ -1,0 +1,24 @@
+{
+  "name": "node-shell-workshop",
+  "version": "1.0.0",
+  "description": "A workshop that takes you through the basics of doing shell scripting with node.js.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msachi/Node-Shell-Workshop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "preferGlobal": "true",
+  "bin": {
+    "node-cat": "lesson-1/cat.js",
+    "node-ls": "lesson-1/ls.js"
+  },
+  "bugs": {
+    "url": "https://github.com/msachi/Node-Shell-Workshop/issues"
+  },
+  "homepage": "https://github.com/msachi/Node-Shell-Workshop#readme"
+}
